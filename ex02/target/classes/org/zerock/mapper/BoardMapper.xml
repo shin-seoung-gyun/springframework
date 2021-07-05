@@ -38,6 +38,9 @@
 	  
 	  </update>
 	  
-	 
+	  <select id="ranking" resultType="org.zerock.domain.RankVO">
+	  select writer, COUNT(*) as "rankNum" from tbl_board group by writer order by COUNT(*) desc
+	  </select>
+	  
 	  
   </mapper>

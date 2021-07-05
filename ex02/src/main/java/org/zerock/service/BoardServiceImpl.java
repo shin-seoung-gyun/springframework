@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.BoardVO;
-
+import org.zerock.domain.RankVO;
 import org.zerock.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -48,6 +48,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getList() {
 		log.info("글목록 가져오기.....");
 		return mapper.getList();
+	}
+
+	@Override
+	public List<RankVO> ranking() {
+		
+		return mapper.ranking();
 	}
 
 

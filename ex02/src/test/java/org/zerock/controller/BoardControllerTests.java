@@ -87,7 +87,13 @@ public class BoardControllerTests {
 	}
 	
 	
-	
+	@Test
+	public void testRankList() throws Exception{
+		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/board/rank"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+	}
 	
 	
 	

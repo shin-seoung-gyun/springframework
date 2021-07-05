@@ -2,9 +2,8 @@ package org.zerock.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.RankVO;
 
 
 public interface BoardMapper {
@@ -32,7 +31,7 @@ public interface BoardMapper {
 	public int update(BoardVO board);
 	
 	//글쓴수 랭킹
-
+	public List<RankVO> ranking();
 	
 	
 }

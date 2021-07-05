@@ -75,6 +75,11 @@ public class BoardMapperTests {
 		
 	}
 	
+	@Test
+	public void testRanking() {
+		log.info(mapper.ranking());
+		
+	}
 	
 		
 }

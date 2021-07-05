@@ -62,7 +62,13 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	
+	@PostMapping("/rank")
+	public String rank() {
+		log.info("랭크 요청중");
+		service.ranking();
+			
+		return "redirect:/board/list";
+	}
 		
 	
 	

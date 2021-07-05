@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.List;
 
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.RankVO;
 
 
 public interface BoardService {
@@ -18,7 +19,7 @@ public interface BoardService {
 	//5.목록 읽기
 	public List<BoardVO> getList();
 	//6.랭킹
-
+	public List<RankVO> ranking();
 	
 	
 }
