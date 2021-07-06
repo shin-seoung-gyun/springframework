@@ -22,10 +22,10 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-6">
-							<form role="form" action="modify" method="post">
+							<form role="form" action="/board/modify" method="post">
 								<div class="form-group">
-									<label>글 번호</label> <input class="form-control"
-										value="${board.bno}" readonly="readonly">
+									<label>글 번호</label> 
+									<input class="form-control" name="bno" value="${board.bno}" readonly>
 
 								</div>
 								<div class="form-group">
@@ -35,18 +35,17 @@
 								</div>
 								<div class="form-group">
 									<label>작성자</label> <input class="form-control" name="writer"
-										value="${board.writer}" readonly="readonly">
+										value="${board.writer}" readonly>
 								</div>
 
 								<div class="form-group">
 									<label>글 내용</label>
-									<textarea class="form-control" rows="3" placeholder="내용을 입력하세요"
-										name="content">${board.content}</textarea>
+									<textarea class="form-control" rows="3" name="content">${board.content}</textarea>
 								</div>
 
 								<button type="submit" class="btn btn-primary btn-outline">수정완료</button>
 								<button type="button" class="btn btn-danger btn-outline"
-									id="delBtn">삭제하기</button>
+									id="delBtn" onclick="javascript: form.action='/board/remove'; form.submit();">삭제하기</button>
 								<button type="button" class="btn btn-success btn-outline"
 									onclick="location.href='list'">목록으로</button>
 							</form>
@@ -81,14 +80,15 @@
 <script src="../dist/js/sb-admin-2.js"></script>
 
 <script>
-	$(document).ready(function() {
-		var formObj=$("form")
+// 	$(document).ready(function() {
+// // 		
 		
-		$("#delBtn").on("click", function() {
-			formObj.attr("action","remove");
-			formObj.submit();
-		});
-	});
+// 		$("#delBtn").on("click",function() {
+// 			$("form").attr("action","remove");
+// 			$("form")[0].submit();
+// 		});
+		
+// 	});
 </script>
 </body>
 
