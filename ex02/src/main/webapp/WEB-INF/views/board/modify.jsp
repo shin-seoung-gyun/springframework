@@ -91,7 +91,7 @@
 		
 		$("#delBtn").on("click",function() {
 			$("form").attr("action","remove");
-			$("form")[0].submit();
+			$("form").submit();
 		});
 		
 	});

@@ -75,11 +75,13 @@ public class BoardController {
 	
 	
 	@PostMapping("/remove")
-	public String remove(Long bno, RedirectAttributes rttr) {
+	public String remove(Long bno, RedirectAttributes rttr, Criteria cri) {
 		log.info("삭제요청");
 		service.remove(bno);
 		rttr.addFlashAttribute("result3", bno);
-		return "redirect:/board/list";
+		rttr.addAttribute("pageNum",cri.getPageNum());
+		rttr.addAttribute("amount",cri.getAmount());
+		return "redirect:/board/list?";
 	}
 	
 	@PostMapping("/rank")
