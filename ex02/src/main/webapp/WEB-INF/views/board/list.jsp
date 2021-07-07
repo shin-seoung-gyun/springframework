@@ -44,12 +44,12 @@
 								<c:forEach items="${list}" var="board">
 
 									<tr>
-										<td><a href="get?bno=${board.bno }">${board.bno }</a></td>
-										<td><a href="get?bno=${board.bno }">${board.title }</a></td>
-										<td><a href="get?bno=${board.bno }">${board.writer }</a></td>
-										<td><a href="get?bno=${board.bno }"><fmt:formatDate
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">${board.bno }</a></td>
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">${board.title }</a></td>
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">${board.writer }</a></td>
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}"><fmt:formatDate
 													pattern="yyyy년MM월dd일" value="${board.regdate }" /></a></td>
-										<td><a href="get?bno=${board.bno }"><fmt:formatDate
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}"><fmt:formatDate
 													pattern="yyyy년MM월dd일" value="${board.updatedate }" /></a></td>
 									</tr>
 								</c:forEach>
@@ -57,6 +57,25 @@
 						</table>
 					</div>
 					<!-- /.table-responsive -->
+					<c:if test="${pageMaker.prev }">
+					<a href="list?pageNum=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a> &nbsp;&nbsp; 
+					</c:if>
+					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+					
+					<c:if test="${pageMaker.cri.pageNum ==num }">
+					<a href="list?pageNum=${num}&amount=${pageMaker.cri.amount}"><h1 style="color:red">${num}</h1></a> &nbsp;&nbsp;
+<!-- 					나중에 amount 확인 -->
+					</c:if>
+					
+					<c:if test="${pageMaker.cri.pageNum != num }">
+					<a href="list?pageNum=${num}&amount=${pageMaker.cri.amount}">${num}</a> &nbsp;&nbsp;
+<!-- 					나중에 amount 확인 -->
+					</c:if>
+					
+					</c:forEach>
+					<c:if test="${pageMaker.next }">
+					<a href="list?pageNum=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
+					</c:if>
 				</div>
 				<!-- /.panel-body -->
 			</div>
@@ -81,6 +100,43 @@
 				<h4 class="modal-title" id="myModalLabel">게시물 등록 알림</h4>
 			</div>
 			<div class="modal-body">게시물 ${result } 번이 등록되었습니다.</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">게시물 수정 알림</h4>
+			</div>
+			<div class="modal-body">게시물 ${result2 } 번이 수정되었습니다.</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">게시물 삭제 알림</h4>
+			</div>
+			<div class="modal-body">게시물 ${result3 } 번이 삭제되었습니다.</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
@@ -118,35 +174,40 @@
 <script>
 	$(document).ready(function() {
 		var result = "${result}";
-// 		checkModal(result);
-// 		history.replaceState({}, null, null);
-// 		function checkModal(result) {
-// 			if (result == "" || history.state){
-// 				return;
-// 			}
-// 			if (result != "" || !history.state) {
-// 				console.log("등록된 번호는");
-// 				console.log(result);
-// 			}
-// 			$("#myModal").modal("show");
-
-// 		}
+		var result2 = "${result2}";
+		var result3 = "${result3}";
 		
 		if(result==""||history.state){
 			console.log("모달창 금지");
 		} else{
 			$("#myModal").modal("show");
 		}
-
+		
+		if(result2==""||history.state){
+			console.log("모달창 금지");
+		} else{
+			$("#myModal2").modal("show");
+		}
+		
+		if(result3==""||history.state){
+			console.log("모달창 금지");
+		} else{
+			$("#myModal3").modal("show");
+		}
 
 		history.replaceState({}, null, null);
 
 		$("#regBtn").on("click", function() {
-			self.location = "/board/register";
+			self.location = "/board/register?pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}";
 		});
 
 	});
 </script>
+
+
+		
+		
+
 
 
 </body>

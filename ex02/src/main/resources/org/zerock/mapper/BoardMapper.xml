@@ -42,5 +42,16 @@
 	  select writer, COUNT(*) as "rankNum" from tbl_board group by writer order by COUNT(*) desc
 	  </select>
 	  
+	  <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	 
+	  <![CDATA[ select bno,title,writer,regdate,updatedate from (select rownum rn,bno,title,writer,regdate,updatedate from (select * from  
+	  tbl_board where ROWNUM<=#{pageNum}*#{amount} order by bno desc)) where rn>(#{pageNum}-1)*#{amount}]]>	
+                                                                   <!--  (받아오는 #{}안에서는 수식계산이 안됨) -->
+	  </select>
+	  
+	  <select id="getTotalCount" resultType="long">
+	  <![CDATA[select count(*) from tbl_board where bno>0]]>
+	  </select>
+	  
 	  
   </mapper>

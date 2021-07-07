@@ -42,10 +42,16 @@
 									<label>글 내용</label>
 									<textarea class="form-control" rows="3" name="content">${board.content}</textarea>
 								</div>
+<!-- 								/*추가*/ -->
+								<input type="hidden" value=${cri.pageNum } name="pageNum">
+								<input type="hidden" value=${cri.amount } name="amount">
+								
+								
+								
 
 								<button type="submit" class="btn btn-primary btn-outline">수정완료</button>
 								<button type="button" class="btn btn-danger btn-outline"
-									id="delBtn" onclick="javascript: form.action='/board/remove'; form.submit();">삭제하기</button>
+									id="delBtn">삭제하기</button>
 								<button type="button" class="btn btn-success btn-outline"
 									onclick="location.href='list'">목록으로</button>
 							</form>
@@ -68,27 +74,27 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<script src="/resources/vendor/metisMenu/metisMenu.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
+<script src="/resources/dist/js/sb-admin-2.js"></script>
 
 <script>
-// 	$(document).ready(function() {
-// // 		
+	$(document).ready(function() {
+// 		 onclick="javascript: form.action='/board/remove'; form.submit();"
 		
-// 		$("#delBtn").on("click",function() {
-// 			$("form").attr("action","remove");
-// 			$("form")[0].submit();
-// 		});
+		$("#delBtn").on("click",function() {
+			$("form").attr("action","remove");
+			$("form")[0].submit();
+		});
 		
-// 	});
+	});
 </script>
 </body>
 

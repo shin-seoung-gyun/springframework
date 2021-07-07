@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -80,6 +81,14 @@ public class BoardMapperTests {
 		log.info(mapper.ranking());
 		
 	}
-	
+	@Test
+	public void testGetListWithPaging() {
+		Criteria cri = new Criteria();
+		mapper.getListWithPaging(cri).forEach(board->log.info(board));
+	}
+	@Test
+	public void testGetTotalCount() {
+		log.info("전체글개수"+mapper.getTotalCount());
+	}
 		
 }

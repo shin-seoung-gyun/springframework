@@ -3,14 +3,18 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 import org.zerock.domain.RankVO;
 
 
 public interface BoardMapper {
 	
 //	@Select("select * from tbl_board where bno>0")
+	//전체목록 가져오기
 	public List<BoardVO> getList(); 
 	
+	//추가-해당페이지 목록 가져오기
+	public List<BoardVO> getListWithPaging(Criteria cri);
 	
 	//글 등록
 	
@@ -32,6 +36,9 @@ public interface BoardMapper {
 	
 	//글쓴수 랭킹
 	public List<RankVO> ranking();
+	
+	//전체 글 개수
+	public Long getTotalCount();
 	
 	
 }
