@@ -42,6 +42,8 @@ select rownum,bno from (select *from tbl_board order by title);
 select bno, title, writer from (select rownum rn,bno,title,writer from (select * from  tbl_board where ROWNUM<=20 order by bno desc)) where rn>10;
 
 
+select count(*) from tbl_board where bno>0;
+
 
 
 

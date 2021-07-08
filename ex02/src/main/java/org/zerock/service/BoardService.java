@@ -25,7 +25,7 @@ public interface BoardService {
 	//6.랭킹
 	public List<RankVO> ranking();
 	//7.전체글 개수
-	public Long getTotal();
+	public Long getTotal(Criteria cri);
 	
 	
 }

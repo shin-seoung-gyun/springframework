@@ -27,7 +27,7 @@ public class BoardController {
 	public void list(Model model, Criteria cri) {
 		log.info("목록페이지요청");
 		model.addAttribute("list",service.getList(cri));
-		model.addAttribute("pageMaker",new PageDTO(cri,service.getTotal()));
+		model.addAttribute("pageMaker",new PageDTO(cri,service.getTotal(cri)));
 	}
 	
 	@PostMapping("/register")
@@ -66,9 +66,14 @@ public class BoardController {
 		log.info("수정 요청중");
 		service.modify(board);
 		log.info(cri);
-		rttr.addFlashAttribute("result2", board.getBno());
+		rttr.addFlashAttribute("result2", board.getBno());//모달창 데이터
+		
+		
 		rttr.addAttribute("pageNum",cri.getPageNum());
 		rttr.addAttribute("amount",cri.getAmount());
+		rttr.addAttribute("type",cri.getType());
+		rttr.addAttribute("keyword",cri.getKeyword());
+		
 		
 		return "redirect:/board/list?";
 	}
@@ -78,18 +83,20 @@ public class BoardController {
 	public String remove(Long bno, RedirectAttributes rttr, Criteria cri) {
 		log.info("삭제요청");
 		service.remove(bno);
-		rttr.addFlashAttribute("result3", bno);
+		rttr.addFlashAttribute("result3", bno);//모달창
+		
+		
 		rttr.addAttribute("pageNum",cri.getPageNum());
 		rttr.addAttribute("amount",cri.getAmount());
+		rttr.addAttribute("type",cri.getType());
+		rttr.addAttribute("keyword",cri.getKeyword());
 		return "redirect:/board/list?";
 	}
 	
-	@PostMapping("/rank")
-	public String rank() {
+	@GetMapping("/rank")
+	public void rank(Model model) {
 		log.info("랭크 요청중");
-		service.ranking();
-			
-		return "redirect:/board/list";
+		model.addAttribute("ranking", service.ranking());
 	}
 		
 	

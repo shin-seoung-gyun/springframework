@@ -45,6 +45,8 @@
 <!-- 								/*추가*/ -->
 								<input type="hidden" value=${cri.pageNum } name="pageNum">
 								<input type="hidden" value=${cri.amount } name="amount">
+								<input type="hidden" value=${cri.type } name="type">
+								<input type="hidden" value=${cri.keyword } name="keyword">
 								
 								
 								
@@ -53,7 +55,7 @@
 								<button type="button" class="btn btn-danger btn-outline"
 									id="delBtn">삭제하기</button>
 								<button type="button" class="btn btn-success btn-outline"
-									onclick="location.href='list'">목록으로</button>
+									onclick="location.href='list?pageNum=${cri.pageNum}&amount=${cri.amount}&type=${cri.type }&keyword=${cri.keyword }'">목록으로</button>
 							</form>
 						</div>
 

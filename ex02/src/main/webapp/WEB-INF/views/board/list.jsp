@@ -44,37 +44,70 @@
 								<c:forEach items="${list}" var="board">
 
 									<tr>
-										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">${board.bno }</a></td>
-										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">${board.title }</a></td>
-										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">${board.writer }</a></td>
-										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}"><fmt:formatDate
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }">${board.bno }</a></td>
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }">${board.title }</a></td>
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }">${board.writer }</a></td>
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }"><fmt:formatDate
 													pattern="yyyy년MM월dd일" value="${board.regdate }" /></a></td>
-										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}"><fmt:formatDate
+										<td><a href="get?bno=${board.bno }&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }"><fmt:formatDate
 													pattern="yyyy년MM월dd일" value="${board.updatedate }" /></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
-					<!-- /.table-responsive -->
+					<!-- 검색기능 구현 -->
+					<div>
+					<form action="list" method="get">
+						<select name="type" >
+							<option value=""
+								<c:out value="${ pageMaker.cri.type==null?'selected':''}"/>>--</option> 
+							<option value="T"
+								<c:out value="${ pageMaker.cri.type eq 'T'?'selected':''}"/>>제목 </option> 
+							<option value="C"
+								<c:out value="${ pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option> 
+							<option value="W"
+								<c:out value="${ pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option> 
+							<option value="TC"
+								<c:out value="${ pageMaker.cri.type eq 'TC'?'selected':''}"/>>제목 or 내용</option> 
+							<option value="TW"
+								<c:out value="${ pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목 or 작성자</option> 
+							<option value="CW"
+								<c:out value="${ pageMaker.cri.type eq 'CW'?'selected':''}"/>>내용 or 작성자</option> 
+							<option value="TCW"
+								<c:out value="${ pageMaker.cri.type eq 'TCW'?'selected':''}"/>>제목 or 내용 or 작성자</option> 
+						</select>
+						<input type="text" name="keyword"
+						value='<c:out value="${pageMaker.cri.keyword }"/>'/>
+						
+						<input type ="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type ="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<input type="submit" value="검색">
+						
+					</form>
+					</div>
+					
+					<!-- 페이지 넘기기 기능 구현 -->
 					<c:if test="${pageMaker.prev }">
-					<a href="list?pageNum=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a> &nbsp;&nbsp; 
+					<a href="list?pageNum=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }">prev</a> &nbsp;&nbsp; 
 					</c:if>
+					
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
 					
 					<c:if test="${pageMaker.cri.pageNum ==num }">
-					<a href="list?pageNum=${num}&amount=${pageMaker.cri.amount}"><h1 style="color:red">${num}</h1></a> &nbsp;&nbsp;
-<!-- 					나중에 amount 확인 -->
+					<a href="list?pageNum=${num}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }"><h1 style="color:red">${num}</h1></a> &nbsp;&nbsp;
+					
 					</c:if>
 					
 					<c:if test="${pageMaker.cri.pageNum != num }">
-					<a href="list?pageNum=${num}&amount=${pageMaker.cri.amount}">${num}</a> &nbsp;&nbsp;
-<!-- 					나중에 amount 확인 -->
+					<a href="list?pageNum=${num}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }">${num}</a> &nbsp;&nbsp;
+
 					</c:if>
 					
 					</c:forEach>
+					
 					<c:if test="${pageMaker.next }">
-					<a href="list?pageNum=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
+					<a href="list?pageNum=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}&keyword=${pageMaker.cri.keyword }&type=${pageMaker.cri.type }">next</a>
 					</c:if>
 				</div>
 				<!-- /.panel-body -->

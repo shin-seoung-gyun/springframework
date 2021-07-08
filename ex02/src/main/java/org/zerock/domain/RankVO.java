@@ -6,4 +6,5 @@ import lombok.Data;
 public class RankVO {
 	private String writer;
 	private int rankNum;
+	private int rownum;
 }

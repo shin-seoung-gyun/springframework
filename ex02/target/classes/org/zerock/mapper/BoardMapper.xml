@@ -6,6 +6,36 @@
   
   <mapper namespace="org.zerock.mapper.BoardMapper">
   
+  <sql id="criteria">
+ 
+	  <trim prefix="and (" suffix=")">
+	  <trim prefixOverrides="or">
+	  	<foreach item='type' collection='typeArr'>
+	  		<trim prefix="or">
+	  		<choose>
+	  		
+	  			<when test="type=='T'.toString()">
+	  			title like '%'||#{keyword}||'%'
+	  			</when>
+	  			
+	  			<when test="type=='C'.toString()">
+	  			content like '%'||#{keyword}||'%'
+	  			</when>
+	  			
+	  			<when test="type=='W'.toString()">
+	  			writer like '%'||#{keyword}||'%'
+	  			</when>
+	  			
+	  		</choose>
+	  		</trim>
+	  	</foreach>
+	  	</trim>
+	  </trim>
+
+
+  	 </sql>
+  
+  
 	  <select id="getList" resultType="org.zerock.domain.BoardVO">
 	  <![CDATA[select * from tbl_board where bno>0]]>	
 	  </select>
@@ -39,18 +69,25 @@
 	  </update>
 	  
 	  <select id="ranking" resultType="org.zerock.domain.RankVO">
-	  select writer, COUNT(*) as "rankNum" from tbl_board group by writer order by COUNT(*) desc
+	  <![CDATA[select writer, "rankNum",rownum from (select writer, COUNT(*) as "rankNum" from tbl_board group by writer order by COUNT(*) desc) where ROWNUM <=3]]>
 	  </select>
 	  
 	  <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
 	 
-	  <![CDATA[ select bno,title,writer,regdate,updatedate from (select rownum rn,bno,title,writer,regdate,updatedate from (select * from  
-	  tbl_board where ROWNUM<=#{pageNum}*#{amount} order by bno desc)) where rn>(#{pageNum}-1)*#{amount}]]>	
-                                                                   <!--  (받아오는 #{}안에서는 수식계산이 안됨) -->
+	  <![CDATA[ select bno,title,writer,regdate,updatedate from (select rownum rn,bno,title,writer,regdate,updatedate 
+	  from (select * from  
+	  tbl_board where ROWNUM<=#{pageNum}*#{amount}
+	  ]]>	
+	  <include refid="criteria"></include>
+	  <![CDATA[
+	  order by bno desc)) where rn>(#{pageNum}-1)*#{amount}
+	  ]]>	
+                                                                   
 	  </select>
 	  
 	  <select id="getTotalCount" resultType="long">
 	  <![CDATA[select count(*) from tbl_board where bno>0]]>
+	  <include refid="criteria"></include>
 	  </select>
 	  
 	  

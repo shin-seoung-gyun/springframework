@@ -88,7 +88,17 @@ public class BoardMapperTests {
 	}
 	@Test
 	public void testGetTotalCount() {
-		log.info("전체글개수"+mapper.getTotalCount());
+		Criteria cri = new Criteria();
+		log.info("전체글개수"+mapper.getTotalCount(cri));
+	}
+	
+	@Test
+	public void testSearch() {
+		Criteria cri = new Criteria();
+		cri.setType("T");
+		
+		
+		mapper.getListWithPaging(cri).forEach(board->log.info(board));
 	}
 		
 }

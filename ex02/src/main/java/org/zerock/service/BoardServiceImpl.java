@@ -64,9 +64,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Long getTotal() {
+	public Long getTotal(Criteria cri) {
 		log.info("전체글 개수 요청");
-		return mapper.getTotalCount();
+		return mapper.getTotalCount(cri);
 	}
 
 

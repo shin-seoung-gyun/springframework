@@ -38,7 +38,7 @@ public interface BoardMapper {
 	public List<RankVO> ranking();
 	
 	//전체 글 개수
-	public Long getTotalCount();
+	public Long getTotalCount(Criteria cri);
 	
 	
 }
