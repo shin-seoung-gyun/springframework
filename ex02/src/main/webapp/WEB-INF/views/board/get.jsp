@@ -45,8 +45,8 @@
                                             <textarea class="form-control" rows="3" placeholder="내용을 입력하세요"  name = "content" readonly="readonly">${board.content}</textarea>
                                         </div>
                                         
-                                        <button type="button" class="btn btn-primary btn-outline" onclick="location.href='modify?bno=${board.bno}&pageNum=${cri.pageNum}&amount=${cri.amount}'">수정</button>
-                                        <button type="button" class="btn btn-success btn-outline" onclick="location.href='list?pageNum=${cri.pageNum}&amount=${cri.amount}'">목록으로</button>
+                                        <button type="button" class="btn btn-primary btn-outline" onclick="location.href='modify?bno=${board.bno}&pageNum=${cri.pageNum}&amount=${cri.amount}&type=${cri.type}&keyword=${cri.keyword }'">수정</button>
+                                        <button type="button" class="btn btn-success btn-outline" onclick="location.href='list?pageNum=${cri.pageNum}&amount=${cri.amount}&type=${cri.type}&keyword=${cri.keyword }'">목록으로</button>
                                     </form>
                                 </div>
                                 
