@@ -74,13 +74,14 @@
 	  
 	  <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
 	 
-	  <![CDATA[ select bno,title,writer,regdate,updatedate from (select rownum rn,bno,title,writer,regdate,updatedate 
-	  from (select * from  
-	  tbl_board where ROWNUM<=#{pageNum}*#{amount}
+	  <![CDATA[ select bno,title,writer,regdate,updatedate 
+	  from (select rownum rn,bno,title,writer,regdate,updatedate 
+	  from (select * from(select*from tbl_board order by bno desc)  
+	  where ROWNUM<=#{pageNum}*#{amount}
 	  ]]>	
 	  <include refid="criteria"></include>
 	  <![CDATA[
-	  order by bno desc)) where rn>(#{pageNum}-1)*#{amount}
+	  )) where rn > (#{pageNum}-1)*#{amount}
 	  ]]>	
                                                                    
 	  </select>
@@ -89,6 +90,13 @@
 	  <![CDATA[select count(*) from tbl_board where bno>0]]>
 	  <include refid="criteria"></include>
 	  </select>
+	  
+	  <select id="getTimeCnt" resultType="org.zerock.domain.TimeVO">
+	  select  "hourcnt",count(*) as "cnt" from (select to_char(regdate, 'hh24') as "hourcnt" from tbl_board) group by "hourcnt" order by "hourcnt"
+	 
+	  </select>
+	  
+	  
 	  
 	  
   </mapper>

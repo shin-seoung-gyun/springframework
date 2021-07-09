@@ -52,6 +52,11 @@ public class BoardServiceTests {
 		service.remove(5L);
 	}
 	
+	@Test
+	public void testTimeCnt() {
+		
+		service.getTimeCnt();
+	}
 	
 	
 	

@@ -100,5 +100,12 @@ public class BoardMapperTests {
 		
 		mapper.getListWithPaging(cri).forEach(board->log.info(board));
 	}
+	
+	
+	@Test
+	public void testTimeCnt() {
+				
+		mapper.getTimeCnt();
+	}
 		
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.RankVO;
+import org.zerock.domain.TimeVO;
 
 
 public interface BoardService {
@@ -26,6 +27,7 @@ public interface BoardService {
 	public List<RankVO> ranking();
 	//7.전체글 개수
 	public Long getTotal(Criteria cri);
-	
+	//8.시간별 글 개수
+	public List<TimeVO> getTimeCnt();
 	
 }

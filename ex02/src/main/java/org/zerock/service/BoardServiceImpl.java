@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.RankVO;
+import org.zerock.domain.TimeVO;
 import org.zerock.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -67,6 +68,13 @@ public class BoardServiceImpl implements BoardService {
 	public Long getTotal(Criteria cri) {
 		log.info("전체글 개수 요청");
 		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public List<TimeVO> getTimeCnt() {
+		log.info("시간대별 글 개수 요청");
+		
+		return mapper.getTimeCnt();
 	}
 
 

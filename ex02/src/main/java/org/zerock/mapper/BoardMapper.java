@@ -5,6 +5,7 @@ import java.util.List;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.RankVO;
+import org.zerock.domain.TimeVO;
 
 
 public interface BoardMapper {
@@ -39,6 +40,9 @@ public interface BoardMapper {
 	
 	//전체 글 개수
 	public Long getTotalCount(Criteria cri);
+	
+	//시간대 별 글 개수
+	public List<TimeVO> getTimeCnt();
 	
 	
 }

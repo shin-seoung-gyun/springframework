@@ -97,8 +97,9 @@ public class BoardController {
 	public void rank(Model model) {
 		log.info("랭크 요청중");
 		model.addAttribute("ranking", service.ranking());
+		model.addAttribute("Time",service.getTimeCnt());
 	}
-		
+	
 	
 	
 	
