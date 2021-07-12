@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.zerock.mapper.BoardMapper">
+  
+  <sql id="criteria">
+ 
+	  <trim prefix="and (" suffix=")">
+	  <trim prefixOverrides="or">
+	  	<foreach item='type' collection='typeArr'>
+	  		<trim prefix="or">
+	  		<choose>
+	  		
+	  			<when test="type=='T'.toString()">
+	  			title like '%'||#{keyword}||'%'
+	  			</when>
+	  			
+	  			<when test="type=='C'.toString()">
+	  			content like '%'||#{keyword}||'%'
+	  			</when>
+	  			
+	  			<when test="type=='W'.toString()">
+	  			writer like '%'||#{keyword}||'%'
+	  			</when>
+	  			
+	  		</choose>
+	  		</trim>
+	  	</foreach>
+	  	</trim>
+	  </trim>
+
+
+  	 </sql>
+  
+  
+	  <select id="getList" resultType="org.zerock.domain.BoardVO">
+	  <![CDATA[select * from tbl_board where bno>0]]>	
+	  </select>
+	  
+	  <insert id="insert">
+	  	insert into tbl_board (bno,title,content,writer) values(seq_board.nextval, #{title},#{content},#{writer})
+	  </insert>
+	  
+	  
+	  <insert id="insertSelectKey">
+	  	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+	  		select seq_board.nextval from dual
+	  	</selectKey>
+	  	insert into tbl_board (bno,title,content,writer) values(#{bno}, #{title},#{content},#{writer})
+	  </insert>
+	  
+	  <select id="read" resultType="org.zerock.domain.BoardVO">
+	  	select * from tbl_board where bno=#{bno}
+	  </select>
+	  
+	  <delete id="delete">
+	  	delete from tbl_board where bno = #{bno}
+	  
+	  </delete>
+	  
+	  
+	  <update id = "update">
+	  
+	  update tbl_board set title = #{title},content = #{content},updatedate=sysdate where bno = #{bno}
+	  
+	  </update>
+	  
+	  <select id="ranking" resultType="org.zerock.domain.RankVO">
+	  <![CDATA[select writer, "rankNum",rownum from (select writer, COUNT(*) as "rankNum" from tbl_board group by writer order by COUNT(*) desc) where ROWNUM <=3]]>
+	  </select>
+	  
+	  <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	 
+	  <![CDATA[ select bno,title,writer,regdate,updatedate 
+	  from (select rownum rn,bno,title,writer,regdate,updatedate 
+	  from (select * from(select*from tbl_board order by bno desc)  
+	  where ROWNUM<=#{pageNum}*#{amount}
+	  ]]>	
+	  <include refid="criteria"></include>
+	  <![CDATA[
+	  )) where rn > (#{pageNum}-1)*#{amount}
+	  ]]>	
+                                                                   
+	  </select>
+	  
+	  <select id="getTotalCount" resultType="long">
+	  <![CDATA[select count(*) from tbl_board where bno>0]]>
+	  <include refid="criteria"></include>
+	  </select>
+	  
+	  <select id="getTimeCnt" resultType="org.zerock.domain.TimeVO">
+	  select  "hourcnt",count(*) as "cnt" from (select to_char(regdate, 'hh24') as "hourcnt" from tbl_board) group by "hourcnt" order by "hourcnt"
+	 
+	  </select>
+	  
+	  
+	  
+	  
+  </mapper>
