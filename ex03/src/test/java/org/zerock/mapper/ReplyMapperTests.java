@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.domain.Criteria;
 import org.zerock.domain.ReplyVO;
 
 import lombok.extern.log4j.Log4j;
@@ -25,7 +26,7 @@ public class ReplyMapperTests {
 	}
 	
 	@Test
-	public void testInsert() {
+	public void testInsert() throws Exception {
 		
 		ReplyVO vo = new ReplyVO();
 		vo.setBno(1277970L);
@@ -43,7 +44,12 @@ public class ReplyMapperTests {
 			vo.setBno(bnoArr[i%3]);
 			vo.setReply("댓글 junit을통한 테스트"+i);
 			vo.setReplyer("테스터i");
-			mapper.insert(vo);
+			try {
+				mapper.insert(vo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		});
 		
@@ -79,6 +85,12 @@ public class ReplyMapperTests {
 		
 	}
 	
+	@Test
+	public void testGetListWithPaging() {
+		Criteria cri = new Criteria();
+		Long bno = 1277970L;
+		log.info(mapper.getListWithPaging(cri, bno));
+	}
 	
 	
 }
