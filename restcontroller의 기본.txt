@@ -1,0 +1,18 @@
+요청
+[요청정보]
+1. url
+2. parameter
+3. json,xml등등
+
+응답
+[요청 정보 읽기]
+1. {변수명}      /  @PathVariable("변수명") String aaa
+2. String name / VO vo (자바빈 객체의 세터로 넣고 게터로 가져옴)
+3. @RequestBody 클래스 객체명(VO vo)
+[응답 보내기] -data
+1. String = produces로 설정하고 보내기
+2. 모든객체(그냥)
+
+//응답상태 변경 하고싶을때
+resposeEntity<객체 타입> 으로 보내서 변경할수 있음.
+

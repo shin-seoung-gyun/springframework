@@ -9,12 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.zerock.domain.EndVO;
+import org.zerock.domain.Final_VO;
+import org.zerock.domain.Final_VO2;
 import org.zerock.domain.NumVO;
 import org.zerock.domain.Quiz5;
+import org.zerock.domain.Quiz7;
 import org.zerock.domain.SampleVO;
+import org.zerock.domain.SumVO;
 import org.zerock.domain.Ticket;
 
 import lombok.extern.log4j.Log4j;
@@ -142,13 +148,43 @@ public class SampleController {
 		return "ok";
 		
 	}
+//	
+//	@GetMapping("/qu/{no1}/{no2}")
+//	public Quiz7 quiz7(@PathVariable("no1") int num1,@PathVariable("no2") int num2) {
+//		Quiz7 vo = new Quiz7(num1,num2,num1+num2);
+//		return vo;
+//	}
 	
+	@PutMapping("/final")
+	public SumVO final1(@RequestBody Quiz7 vo1) {
+		int a = vo1.getNum1();
+		int b = vo1.getNum2();
+		SumVO vo = new SumVO(a+b);
+		return vo;
+	}
 	
+	@PostMapping("/final9")
+	public ResponseEntity<Final_VO2> final9(@RequestBody Final_VO vo) {
+		ResponseEntity<Final_VO2> result = null;
+		try {
+			Final_VO2 vo2 = new Final_VO2(vo.getName().length(), vo.getAge());
+			if (10 > vo.getName().length()) {
+				result = new ResponseEntity<>(vo2, HttpStatus.OK);
+			} else {
+				result = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;
+	}
 	
-	
-	
-	
-	
+	@GetMapping("/end/{num}")
+	public EndVO end(@PathVariable("num") int num) {
+		EndVO vo = new EndVO(num);
+		return vo;
+	}
 	
 	
 	
