@@ -76,25 +76,27 @@
 				<!-- /.panel-body -->
 			</div>
 			<!-- /.panel -->
+
+		</div>
+		<!-- /.col-lg-6 -->
+		<div class="col-lg-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">시간대별 글갯수 막대그래프</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					<div class="flot-chart">
+						<div class="flot-chart-content" id="flot-bar-chart"></div>
+					</div>
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
 		</div>
 
 	</div>
 	<!-- /.row -->
 
-	<!-- /.col-lg-6 -->
-	<div class="col-lg-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">시간대별 글갯수 막대그래프</div>
-			<!-- /.panel-heading -->
-			<div class="panel-body">
-				<div class="flot-chart">
-					<div class="flot-chart-content" id="flot-bar-chart"></div>
-				</div>
-			</div>
-			<!-- /.panel-body -->
-		</div>
-		<!-- /.panel -->
-	</div>
+
 
 </div>
 <!-- /#page-wrapper -->
@@ -113,12 +115,12 @@
 <script src="/resources/vendor/morrisjs/morris.min.js"></script>
 
 <!-- Flot Charts JavaScript -->
-    <script src="/resources/vendor/flot/excanvas.min.js"></script>
-    <script src="/resources/vendor/flot/jquery.flot.js"></script>
-    <script src="/resources/vendor/flot/jquery.flot.pie.js"></script>
-    <script src="/resources/vendor/flot/jquery.flot.resize.js"></script>
-    <script src="/resources/vendor/flot/jquery.flot.time.js"></script>
-    <script src="/resources/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+<script src="/resources/vendor/flot/excanvas.min.js"></script>
+<script src="/resources/vendor/flot/jquery.flot.js"></script>
+<script src="/resources/vendor/flot/jquery.flot.pie.js"></script>
+<script src="/resources/vendor/flot/jquery.flot.resize.js"></script>
+<script src="/resources/vendor/flot/jquery.flot.time.js"></script>
+<script src="/resources/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
 
 <!-- 외부스크립트를 가져와서 실행하면 됨. -->
 <script>
@@ -140,7 +142,7 @@ var barOptions = {
         series: {
             bars: {
                 show: true,
-                barWidth: 43200000
+                barWidth: 3600000
             }
         },
         xaxis: {
@@ -163,7 +165,7 @@ var barOptions = {
         label: "bar",
         data: [
         	<c:forEach items="${Time}" var="time1">
-	    	[${time1.hourcnt}00000000, ${time1.cnt}
+	    	[${time1.hourcnt}*60*60*1000, ${time1.cnt}
 		    ],
 	    	</c:forEach>
         ]

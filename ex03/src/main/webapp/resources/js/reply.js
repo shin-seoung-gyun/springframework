@@ -1,5 +1,5 @@
 /**
- * 게시글 리플과 관련된 javascript
+ * 게시글 리플과 관련된 javascript 모듈화+
  */
 
 console.log("Reply Module..............");
@@ -75,11 +75,28 @@ var replyService = (function() {
 		});
 	}
 	
+	function displayTime(timeValue){
+		var dateObj = new Date(timeValue);
+		var year=dateObj.getFullYear();//네자리수 연도
+		var month=dateObj.getMonth()+1;//월은 0부터 시작해서 1을 더해줘야함
+		var day=dateObj.getDate();
+		var hour = dateObj.getHours();
+		var minute = dateObj.getMinutes();
+		var second = dateObj.getSeconds();
+		
+		return year+"/"+month+"/"+day;
+		
+		
+	}
+	
+	
+	
 	return {
 		add : add,
 		getList : getList,
 		remove : remove,
 		update : update,
-		get : get
+		get : get,
+		displayTime : displayTime
 	};
 })();

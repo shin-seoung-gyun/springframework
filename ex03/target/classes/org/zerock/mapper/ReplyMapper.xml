@@ -27,7 +27,15 @@
 	</delete>
 
 	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
-	select *from tbl_reply where bno = #{bno} order by rno
+	<![CDATA[
+	
+	select "rn",rno, bno, reply, replyer, replydate, updatedate from
+	(select rownum as "rn",rno, bno, reply, replyer, replydate, updatedate from
+	(select rno, bno, reply, replyer, replydate, updatedate from tbl_reply where bno=#{bno}
+	 order by rno desc)
+	 where rownum <=#{cri.pageNum}*#{cri.amount})
+	 where "rn" > (#{cri.pageNum}-1)*#{cri.amount}
+	]]>
 	</select>
 
 
