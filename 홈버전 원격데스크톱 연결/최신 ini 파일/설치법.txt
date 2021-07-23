@@ -1,8 +1,0 @@
-1. 새로받은 신규 rdpwrap.ini 파일을
-설치된 경로인 C:\Program Files\RDP Wrapper 폴더에 ini 파일 덮어씌우고
-
-2. 설치파일이 존재하는 위치에서
-RDPWInst.exe -r 실행
-
-3. 이상없는 확인
-RDPConf.exe 로 확인
